@@ -1,0 +1,77 @@
+body,
+html {
+    margin: 0;
+    padding: 0;
+}
+
+summary {
+    cursor: pointer;
+}
+
+.container {
+    position: relative;
+}
+
+.schedule {
+    background: rgba(255, 255, 255, 0.75);
+    margin-left: 20px;
+    padding: 15px;
+    position: absolute;
+    z-index: 401;
+}
+
+.schedule__title {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.schedule__times {
+    margin: 15px 0 0 15px;
+    padding: 0;
+}
+
+.schedule__item:nth-child(n+4) {
+    display: none;
+}
+
+.schedule__times li {
+    margin-bottom: 15px;
+}
+
+.schedule__item--expired {
+    opacity: 0.5;
+}
+
+.schedule__time:last-child {
+    margin-bottom: 0;
+}
+
+#map {
+    height: 100vh;
+}
+
+/* https://github.com/twbs/bootstrap/blob/29d58fb758683db42c2d716ac654dea3ab6063c7/scss/mixins/_screen-reader.scss#L6 */
+.custom-checkbox__input {
+    clip: rect(0, 0, 0, 0);
+    clip-path: inset(50%);
+    border: 0;
+    height: 1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+}
+
+.custom-checkbox__label {
+    border: 1px solid #bee5eb;
+    background: #d1ecf1;
+    padding: 10px 5px;
+}
+
+.custom-checkbox__input:checked + .custom-checkbox__label,
+.custom-checkbox__input:focus + .custom-checkbox__label {
+    background: #fff;
+}
+

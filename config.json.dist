@@ -1,0 +1,13 @@
+{
+    "octranspo": {
+        "appId": "",
+        "apiKey": "",
+        "busNo": 0,
+        "stopNo": 0
+    },
+    "navitia": {
+        "token": "",
+        "stopId": ""
+    }
+}
+
