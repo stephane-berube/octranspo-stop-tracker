@@ -46,7 +46,7 @@ class OCTranspo extends Api {
 
         // TODO: Error handling
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, "https://api.octranspo1.com/v1.2/GetNextTripsForStop");
+        curl_setopt($ch, CURLOPT_URL, "https://api.octranspo1.com/v1.3/GetNextTripsForStop");
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
