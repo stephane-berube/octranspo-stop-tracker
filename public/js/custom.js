@@ -64,12 +64,14 @@
             .then( ( response ) => {
                 return response.json();
             } )
-            .then( ( coordsArr ) => {
+            .then( ( trips ) => {
                 var activeMarkers = [ busStopMarker ];
 
-                coordsArr.forEach( ( coords, i ) => {
+                trips.forEach( ( trip, i ) => {
                     var marker = busMarkers[ i ],
                         busLocation,
+                        coords = trip.coords,
+                        bus= trip.bus,
                         distance;
 
                     if ( coords.latitude && coords.longitude ) {
@@ -78,6 +80,12 @@
 
                         marker.setLatLng( busLocation );
                         marker.addTo( map );
+
+                        marker.bindPopup(
+                            "Length: " + bus.length + "<br>" +
+                            "Double-decker: " + bus.isDoubleDecker
+                        );
+                        marker.on( "click", function() { this.openPopup() } );
 
                         activeMarkers.push( marker );
 

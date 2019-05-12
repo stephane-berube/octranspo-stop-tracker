@@ -54,9 +54,28 @@ class OCTranspo extends Api {
         $response = curl_exec($ch);
         curl_close($ch);
 
-        $coords = $this->parse_xml_response($response);
+        $data = $this->parse_xml_response($response);
 
-        return json_encode($coords);
+        return json_encode($data);
+    }
+
+    // TODO: Bus object
+    private function get_bus_type($busType) {
+        $busLength = 40;
+        $isDoubleDecker = false;
+
+        if (stripos('4', $busType) === false) {
+            $busLength = 60;
+        }
+
+        if (stripos('DD', $busType) !== false) {
+            $isDoubleDecker = true;
+        }
+
+        return [
+            'length' => $busLength,
+            'isDoubleDecker' => $isDoubleDecker
+        ];
     }
 
     // TODO: Utils
@@ -67,15 +86,19 @@ class OCTranspo extends Api {
         $xmlParser = new SimpleXMLElement($response);
         $xmlParser->registerXPathNamespace('tempuri', 'http://tempuri.org/');
         $trips = $xmlParser->xpath('//tempuri:Trip');
+        $data = [];
 
         foreach ($trips as $trip) {
-            $coords[] = [
-                'longitude' => (string)$trip->Longitude,
-                'latitude' => (string)$trip->Latitude
+            $data[] = [
+                'coords' => [
+                    'longitude' => (string)$trip->Longitude,
+                    'latitude' => (string)$trip->Latitude
+                ],
+                'bus' => $this->get_bus_type((string)$trip->BusType)
             ];
         }
 
-        return $coords;
+        return $data;
     }
 }
 
